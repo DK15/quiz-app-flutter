@@ -9,12 +9,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _radioValue1 = 0;
+  int _radioValue1 = -1;
   int correctScore = 0;
-  int _radioValue2 = 0;
-  int _radioValue3 = 0;
-  int _radioValue4 = 0;
-  int _radioValue5 = 0;
+  int _radioValue2 = -1;
+  int _radioValue3 = -1;
+  int _radioValue4 = -1;
+  int _radioValue5 = -1;
 
   void _handleRadioValueChange1(int value) {
     setState(() {
@@ -22,11 +22,14 @@ class _MyAppState extends State<MyApp> {
 
       switch (_radioValue1) {
         case 0:
+          Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
           correctScore++;
           break;
         case 1:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 2:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
       }
     });
@@ -38,11 +41,14 @@ class _MyAppState extends State<MyApp> {
 
       switch (_radioValue2) {
         case 0:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 1:
+          Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
           correctScore++;
           break;
         case 2:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
       }
     });
@@ -54,11 +60,14 @@ class _MyAppState extends State<MyApp> {
 
       switch (_radioValue3) {
         case 0:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 1:
+          Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
           correctScore++;
           break;
         case 2:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
       }
     });
@@ -70,11 +79,14 @@ class _MyAppState extends State<MyApp> {
 
       switch (_radioValue4) {
         case 0:
+          Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
           correctScore++;
           break;
         case 1:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 2:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
       }
     });
@@ -86,10 +98,13 @@ class _MyAppState extends State<MyApp> {
 
       switch (_radioValue5) {
         case 0:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 1:
+          Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
           break;
         case 2:
+          Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
           correctScore++;
           break;
       }
@@ -381,12 +396,14 @@ class _MyAppState extends State<MyApp> {
                                           new RaisedButton(
                                             onPressed: validateAnswers,
                                             child: new Text(
-                                              'Submit',
+                                              'Check Final Score',
+
                                               style: new TextStyle(
                                                   fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.white),
                                             ),
+                                            color: Theme.of(context).accentColor,
                                             shape: new RoundedRectangleBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
@@ -398,12 +415,13 @@ class _MyAppState extends State<MyApp> {
                                           new RaisedButton(
                                             onPressed: resetSelection,
                                             child: new Text(
-                                              'Reset',
+                                              'Reset Selection',
                                               style: new TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.normal,
                                                   fontSize: 16.0,
-                                                  color: Colors.black),
+                                                  color: Colors.white),
                                             ),
+                                            color: Theme.of(context).accentColor,
                                             shape: new RoundedRectangleBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
@@ -428,8 +446,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   void validateAnswers() {
-    Fluttertoast.showToast(
-        msg: 'Your total score is: $correctScore out of 5',
-        toastLength: Toast.LENGTH_LONG);
+    if (_radioValue1 == -1 && _radioValue2 == -1 &&
+        _radioValue3 == -1 && _radioValue4 == -1 &&
+        _radioValue5 == -1) {
+      Fluttertoast.showToast(msg: 'Please select atleast one answer',
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Your total score is: $correctScore out of 5',
+          toastLength: Toast.LENGTH_LONG);
+    }
   }
 }
